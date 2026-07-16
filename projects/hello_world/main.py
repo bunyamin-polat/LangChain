@@ -35,7 +35,7 @@ def main():
     llm = ChatOllama(model="gpt-oss:20b", temperature=0)
 
     chain = summary_prompt_template | llm
-    response = chain.invoke(input={"information": information})
+    response = chain.invoke(input={"info": information})
     print(response.content)
 
 
