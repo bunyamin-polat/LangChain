@@ -175,3 +175,4 @@ cython_debug/
 langchain-docs/
 chroma_db/
 .DS_Store
+.vscode/
