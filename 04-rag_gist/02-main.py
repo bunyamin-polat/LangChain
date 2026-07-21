@@ -18,7 +18,9 @@ embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
 llm = ChatOpenAI()
 
-vectorstore = PineconeVectorStore(index_name=os.environ.get("INDEX_NAME"), embedding=embeddings)
+vectorstore = PineconeVectorStore(
+    index_name=os.environ.get("INDEX_NAME"), embedding=embeddings
+)
 
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
@@ -30,9 +32,11 @@ prompt_template = ChatPromptTemplate.from_template(
       Provide a detailed answer:"""
 )
 
+
 def format_docs(docs):
     """Format the retrieved documents into a single string."""
     return "\n\n".join(doc.page_content for doc in docs)
+
 
 def retrieval_chain_without_lcel(query: str):
     """
@@ -48,18 +52,19 @@ def retrieval_chain_without_lcel(query: str):
     """
     # Step 1: Retrieve relevant documents from the vector store
     docs = retriever.invoke(query)
-    
+
     # Step 2: Format the retrieved documents into a single string
     context = format_docs(docs)
-    
+
     # Step 3: Format the prompt with the context and question
     messages = prompt_template.format_messages(context=context, question=query)
-    
+
     # step 4: Invoke LLM with the formatted messages
     response = llm.invoke(messages)
-    
+
     # Step 5: Return the content of the response
     return response.content
+
 
 def create_retrieval_chain_with_lcel():
     """Create a retrieval chain using LCEL (LangChain Expression Language).
@@ -84,12 +89,12 @@ def create_retrieval_chain_with_lcel():
         | StrOutputParser()
     )
     return retrieval_chain
-    
-  
+
+
 if __name__ == "__main__":
     # Query to ask the model
     query = "What is the Pinecone in Machine Learning?"
-    
+
     # ========================================================================
     # Option 0: Raw invocation without RAG
     # ========================================================================
@@ -109,7 +114,7 @@ if __name__ == "__main__":
     result_without_lcel = retrieval_chain_without_lcel(query)
     print("\nAnswer:")
     print(result_without_lcel)
-    
+
     # ========================================================================
     # Option 2: Use implementation WITH LCEL (Better Approach)
     # ========================================================================
@@ -128,6 +133,3 @@ if __name__ == "__main__":
     result_with_lcel = chain_with_lcel.invoke({"question": query})
     print("\nAnswer:")
     print(result_with_lcel)
-
-    
-    

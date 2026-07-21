@@ -10,7 +10,6 @@ from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain_tavily import TavilyCrawl, TavilyExtract, TavilyMap
-
 from logger import (Colors, log_error, log_header, log_info, log_success,
                     log_warning)
 
