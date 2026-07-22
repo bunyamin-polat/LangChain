@@ -1,9 +1,6 @@
-import os
-
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from langchain_ollama import ChatOllama
-from langchain_openai import ChatOpenAI
 
 # Load environment variables from .env file
 load_dotenv()
@@ -35,7 +32,7 @@ def main():
     llm = ChatOllama(model="gpt-oss:20b", temperature=0)
 
     chain = summary_prompt_template | llm
-    response = chain.invoke(input={"info": information})
+    response = chain.invoke(input={"information": information})
     print(response.content)
 
 
