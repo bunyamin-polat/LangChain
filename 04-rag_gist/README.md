@@ -55,7 +55,5 @@ uv run 02-main.py        # compare no-RAG vs. non-LCEL vs. LCEL retrieval chains
 
 ## Notes
 
-- `02-main.py` has a stray `from click import prompt` import left over from
-  autocomplete/refactoring — it's unused and safe to remove.
 - `retriever` is configured with `search_kwargs={"k": 3}`, so each query pulls the
   3 most similar chunks as context.

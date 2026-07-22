@@ -1,7 +1,6 @@
 import os
 from operator import itemgetter
 
-from click import prompt
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import StrOutputParser

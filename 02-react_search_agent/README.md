@@ -6,12 +6,12 @@ scripts use a local `ChatOllama` model and the Tavily web search API as a tool.
 
 ## What it does
 
-- **`main.py`** — creates an agent with a `TavilySearch` tool and a structured
-  `AgentResponse` (Pydantic) output containing an answer plus a list of sources.
-  Asks it to find AI Engineer job postings.
-- **`main_job_search.py`** — same idea without structured output, returns the raw
+- **`job_search_structured.py`** — creates an agent with a `TavilySearch` tool and a
+  structured `AgentResponse` (Pydantic) output containing an answer plus a list of
+  sources. Asks it to find AI Engineer job postings.
+- **`job_search_raw.py`** — same idea without structured output, returns the raw
   agent message history. Asks it to find 3 job postings.
-- **`main_weather.py`** — defines a custom `@tool`-decorated `search` function that
+- **`weather_search.py`** — defines a custom `@tool`-decorated `search` function that
   wraps the `TavilyClient` directly (instead of the built-in `TavilySearch` tool) and
   asks a weather question.
 
@@ -33,7 +33,7 @@ scripts use a local `ChatOllama` model and the Tavily web search API as a tool.
 | Variable | Required? |
 | --- | --- |
 | `TAVILY_API_KEY` | Yes — used by every script for web search |
-| `OPENAI_API_KEY` | Not used by default (imported but unused) |
+| `OPENAI_API_KEY` | Not used by default |
 | `GOOGLE_API_KEY` | Not used by default |
 | `LANGSMITH_API_KEY` | Optional, enables LangSmith tracing |
 
@@ -42,7 +42,7 @@ scripts use a local `ChatOllama` model and the Tavily web search API as a tool.
 ```bash
 cd projects/02-react_search_agent
 uv sync
-uv run main.py              # structured response with sources
-uv run main_job_search.py   # raw agent message output
-uv run main_weather.py      # custom search tool example
+uv run job_search_structured.py   # structured response with sources
+uv run job_search_raw.py          # raw agent message output
+uv run weather_search.py          # custom search tool example
 ```

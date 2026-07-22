@@ -7,13 +7,13 @@ peeling back one layer of abstraction to show what LangChain's `create_agent` /
 
 ## What it does
 
-- **`1.agent_loop_langchain_tool_calling.py`** — the LangChain way: `@tool`-decorated
+- **`01-agent_loop_langchain_tool_calling.py`** — the LangChain way: `@tool`-decorated
   functions, `init_chat_model(...).bind_tools(...)`, and a manual iteration loop over
   `AIMessage.tool_calls`.
-- **`2.agent_loop_raw_function_calling.py`** — the same loop rewritten against the raw
+- **`02-agent_loop_raw_function_calling.py`** — the same loop rewritten against the raw
   `ollama` Python client, with tool JSON schemas written out by hand instead of derived
   from `@tool`.
-- **`3.raw_react_prompt.py`** — no structured tool-calling API at all. Tool
+- **`03-raw_react_prompt.py`** — no structured tool-calling API at all. Tool
   descriptions are embedded as plain text in a ReAct-style prompt, and the model's
   `Action` / `Action Input` output is parsed back out with regex.
 
@@ -48,7 +48,7 @@ console, and traces runs to LangSmith via `@traceable`.
 ```bash
 cd projects/03-agents_under_the_hood
 uv sync
-uv run 1.agent_loop_langchain_tool_calling.py
-uv run 2.agent_loop_raw_function_calling.py
-uv run 3.raw_react_prompt.py
+uv run 01-agent_loop_langchain_tool_calling.py
+uv run 02-agent_loop_raw_function_calling.py
+uv run 03-raw_react_prompt.py
 ```
